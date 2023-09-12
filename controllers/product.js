@@ -50,10 +50,27 @@ const deleteProduct = async (req, res) => {
     return res.status(200).json({msg: "Product deleted"});
 }
 
+const searchProduct = async (req, res) => {
+    const {name, category, minPrice, maxPrice} = req.query;
+    let query = {};
+    if(name) {
+        query.name = {$regex: name, $options: 'i'};
+    }
+    if(category) {
+        query.category = category;
+    }
+    if(minPrice && maxPrice) {
+        query.price = {$gte: minPrice, $lte: maxPrice};
+    }
+    const products = await Product.find(query);
+    return res.status(200).json({products});
+}
+
 module.exports = {
     getAllProducts,
     getProductById,
     createProduct,
     updateProduct,
-    deleteProduct
+    deleteProduct,
+    searchProduct
 }

@@ -40,8 +40,25 @@ const getPurchaseDetails = async (req, res) => {
     res.status(200).json({ purchase });
 }
 
+const getPurchaseStats = async (req, res) => {
+    const totalPurchases = await Purchase.countDocuments();
+    const topSellingProducts = await Purchase.aggregate([
+      { $group: { _id: '$product', totalSold: { $sum: '$quantity' } } },
+      { $sort: { totalSold: -1 } },
+      { $limit: 5 }, 
+    ]);
+    const topSellingProductsLastWeek = await Purchase.aggregate([
+        { $match: { createdAt: { $gte: new Date(Date.now() - 7 * 24 * 60 * 60 * 1000) } } },
+        { $group: { _id: '$product', totalSold: { $sum: '$quantity' } } },
+        { $sort: { totalSold: -1 } },
+        { $limit: 5 },
+    ])
+    return res.status(200).json({ totalPurchases, topSellingProducts, topSellingProductsLastWeek });
+}
+
 module.exports = {
     createPurchase,
     getUserPurchases,
-    getPurchaseDetails
+    getPurchaseDetails,
+    getPurchaseStats
 }

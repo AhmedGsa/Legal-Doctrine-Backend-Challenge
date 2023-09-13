@@ -10,6 +10,7 @@ const login = async (req, res) => {
     if(!user) {
         throw new BadRequestError('Invalid credentials');
     }
+    console.log(password);
     const isMatch = await user.matchPasswords(password);
     if(!isMatch) {
         throw new BadRequestError('Invalid credentials');

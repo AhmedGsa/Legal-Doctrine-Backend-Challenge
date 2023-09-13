@@ -52,7 +52,7 @@ const getPurchaseStats = async (req, res) => {
         { $group: { _id: '$product', totalSold: { $sum: '$quantity' } } },
         { $sort: { totalSold: -1 } },
         { $limit: 5 },
-    ])
+    ]);
     return res.status(200).json({ totalPurchases, topSellingProducts, topSellingProductsLastWeek });
 }
 

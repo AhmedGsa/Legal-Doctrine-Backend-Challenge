@@ -21,10 +21,15 @@ const errorHandlerMiddleware = require('./middlewares/error-handler');
 app.use(errorHandlerMiddleware);
 
 const start = async () => {
-    await connectDB(process.env.MONGO_URI);
-    app.listen(port, () => {
-        console.log(`Server is listening on port ${port}...`);
-    });
+    try {
+        await connectDB(process.env.MONGO_URI);
+        app.listen(port, () => {
+            console.log(`Server is listening on port ${port}...`);
+        });
+    } catch (error) {
+        console.log(error);
+    }
 }
+    
 
 start();

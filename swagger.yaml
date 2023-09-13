@@ -1,0 +1,410 @@
+openapi: 3.0.0
+info:
+  title: Legal Doctrine Challenge
+  contact: {}
+  version: '1.0'
+servers:
+- url: http://localhost:3000/api/v1
+  variables: {}
+paths:
+  /products:
+    post:
+      tags:
+      - Products
+      summary: Create product
+      operationId: Createproduct
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/CreateproductRequest'
+              - example:
+                  name: Macbook
+                  price: 15000
+                  category: Technology
+            example:
+              name: Macbook
+              price: 15000
+              category: Technology
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security:
+      - bearer: []
+    get:
+      tags:
+      - Products
+      summary: Get Products
+      operationId: GetProducts
+      parameters:
+      - name: page
+        in: query
+        description: ''
+        required: true
+        style: form
+        explode: true
+        schema:
+          type: integer
+          format: int32
+          example: 1
+      - name: pageSize
+        in: query
+        description: ''
+        required: true
+        style: form
+        explode: true
+        schema:
+          type: integer
+          format: int32
+          example: 5
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security: []
+  /products/{id}:
+    get:
+      parameters:
+        - in: path
+          name: id   # Note the name is the same as in the path
+          required: true
+          schema:
+            type: string
+          description: The product ID
+      tags:
+      - Products
+      summary: Get single product
+      operationId: Getsingleproduct
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security: []
+    patch:
+      tags:
+      - Products
+      summary: Update product
+      operationId: Updateproduct
+      parameters:
+        - in: path
+          name: id   # Note the name is the same as in the path
+          required: true
+          schema:
+            type: string
+          description: The product ID
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/UpdateproductRequest'
+              - example:
+                  name: T-Shirt
+                  category: Clothes
+                  available: false
+            example:
+              name: T-Shirt
+              category: Clothes
+              available: false
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security:
+      - bearer: []
+    delete:
+      tags:
+      - Products
+      summary: Delete Product
+      operationId: DeleteProduct
+      parameters:
+        - in: path
+          name: id   # Note the name is the same as in the path
+          required: true
+          schema:
+            type: string
+          description: The product ID
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security:
+      - bearer: []
+  /products/search:
+    get:
+      tags:
+      - Products
+      summary: Search products
+      operationId: Searchproducts
+      parameters:
+      - name: minPrice
+        in: query
+        description: ''
+        required: true
+        style: form
+        explode: true
+        schema:
+          type: integer
+          format: int32
+          example: 1500
+      - name: maxPrice
+        in: query
+        description: ''
+        required: true
+        style: form
+        explode: true
+        schema:
+          type: integer
+          format: int32
+          example: 5000
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security: []
+  /auth/register:
+    post:
+      tags:
+      - Auth
+      summary: Register
+      operationId: Register
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/RegisterRequest'
+              - example:
+                  email: ahmed@gmail.com
+                  password: ahmed123
+            example:
+              email: ahmed@gmail.com
+              password: ahmed123
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security: []
+  /auth/login:
+    post:
+      tags:
+      - Auth
+      summary: Login
+      operationId: Login
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/LoginRequest'
+              - example:
+                  email: userone@gmail.com
+                  password: userone
+            example:
+              email: userone@gmail.com
+              password: userone
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security: []
+  /purchases:
+    post:
+      tags:
+      - Purchases
+      summary: Create Purchase
+      operationId: CreatePurchase
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/CreatePurchaseRequest'
+              - example:
+                  productId: 650085d74036de9e224cb3b7
+                  quantity: 2
+            example:
+              productId: 650085d74036de9e224cb3b7
+              quantity: 2
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security:
+      - bearer: []
+    get:
+      tags:
+      - Purchases
+      summary: Get user purchases
+      operationId: Getuserpurchases
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security:
+      - bearer: []
+  /purchases/{id}:
+    get:
+      tags:
+      - Purchases
+      summary: Get purchase details
+      operationId: Getpurchasedetails
+      parameters:
+        - in: path
+          name: id   # Note the name is the same as in the path
+          required: true
+          schema:
+            type: string
+          description: The purchase ID
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security:
+      - bearer: []
+  /purchases/stats:
+    get:
+      tags:
+      - Purchases
+      summary: Get purchase stats
+      operationId: Getpurchasestats
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security: []
+  /cards:
+    get:
+      tags:
+      - Cards
+      summary: Filter cards
+      operationId: Filtercards
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security: []
+components:
+  schemas:
+    CreateproductRequest:
+      title: CreateproductRequest
+      required:
+      - name
+      - price
+      - category
+      type: object
+      properties:
+        name:
+          type: string
+        price:
+          type: integer
+          format: int32
+        category:
+          type: string
+      example:
+        name: Macbook
+        price: 15000
+        category: Technology
+    UpdateproductRequest:
+      title: UpdateproductRequest
+      required:
+      - name
+      - category
+      - available
+      type: object
+      properties:
+        name:
+          type: string
+        category:
+          type: string
+        available:
+          type: boolean
+      example:
+        name: T-Shirt
+        category: Clothes
+        available: false
+    RegisterRequest:
+      title: RegisterRequest
+      required:
+      - email
+      - password
+      type: object
+      properties:
+        email:
+          type: string
+        password:
+          type: string
+      example:
+        email: ahmed@gmail.com
+        password: ahmed123
+    LoginRequest:
+      title: LoginRequest
+      required:
+      - email
+      - password
+      type: object
+      properties:
+        email:
+          type: string
+        password:
+          type: string
+      example:
+        email: userone@gmail.com
+        password: userone
+    CreatePurchaseRequest:
+      title: CreatePurchaseRequest
+      required:
+      - productId
+      - quantity
+      type: object
+      properties:
+        productId:
+          type: string
+        quantity:
+          type: integer
+          format: int32
+      example:
+        productId: 650085d74036de9e224cb3b7
+        quantity: 2
+  securitySchemes:
+    bearer:
+      type: http
+      scheme: bearer
+security: []
+tags:
+- name: Products
+- name: Auth
+- name: Purchases
+- name: Cards

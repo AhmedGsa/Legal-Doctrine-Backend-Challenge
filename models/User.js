@@ -5,22 +5,23 @@ const jwt = require('jsonwebtoken');
 const userSchema = new mongoose.Schema({
     email: {
         type: String,
-        required: [true, "Please provide an email"],
+        required: [true, 'Please provide an email'],
         unique: true,
         trim: true,
         lowercase: true,
-        match: [/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/, "Please provide a valid email"]
+        // eslint-disable-next-line no-useless-escape
+        match: [/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/, 'Please provide a valid email']
     },
     password: {
         type: String,
-        required: [true, "Please provide a password"],
+        required: [true, 'Please provide a password'],
         minlength: 6,
     },
     isAdmin: {
         type: Boolean,
         default: false
     }
-})
+});
 
 userSchema.pre('save', async function(next) {
     const salt = await bcrypt.genSalt();
@@ -30,7 +31,7 @@ userSchema.pre('save', async function(next) {
 
 userSchema.methods.matchPasswords = async function(password) {
     return await bcrypt.compare(password, this.password);
-}
+};
 
 userSchema.methods.createJWT = function(rememberMe) {
     if(rememberMe) {
@@ -42,6 +43,6 @@ userSchema.methods.createJWT = function(rememberMe) {
             expiresIn: process.env.JWT_EXPIRE_SHORT
         });
     }
-}
+};
 
 module.exports = mongoose.model('User', userSchema);

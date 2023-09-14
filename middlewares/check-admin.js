@@ -7,6 +7,6 @@ const checkAdmin = async (req, res, next) => {
         throw new ForbiddenError('Access denied');
     }
     next();
-}
+};
 
 module.exports = checkAdmin;

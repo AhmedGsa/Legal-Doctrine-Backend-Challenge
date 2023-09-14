@@ -24,7 +24,7 @@ const products = [
         price: 100000,
         category: 'Technology'
     }
-]
+];
 
 const users = [
     {
@@ -40,6 +40,6 @@ const users = [
         password: 'adminadmin',
         isAdmin: true
     }
-]
+];
 
-module.exports = { products, users }
+module.exports = { products, users };

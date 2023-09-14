@@ -14,6 +14,6 @@ const checkAuth = (req, res, next) => {
     } else {
         throw new UnauthorizedError('Unauthorized');
     }
-}
+};
 
 module.exports = checkAuth;

@@ -15,6 +15,7 @@ const productRouter = require('./routes/product');
 const authRouter = require('./routes/auth');
 const purchaseRouter = require('./routes/purchase');
 const cardsRouter = require('./routes/cards');
+// eslint-disable-next-line no-undef
 const port = 3000 || process.env.PORT;
 
 // middleware
@@ -31,6 +32,7 @@ app.use(errorHandlerMiddleware);
 
 const start = async () => {
     try {
+        // eslint-disable-next-line no-undef
         await connectDB(process.env.MONGO_URI);
         app.listen(port, () => {
             console.log(`Server is listening on port ${port}...`);
@@ -38,7 +40,7 @@ const start = async () => {
     } catch (error) {
         console.log(error);
     }
-}
+};
     
 
 start();

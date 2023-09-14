@@ -5,7 +5,8 @@
   "main": "app.js",
   "scripts": {
     "start": "nodemon app.js",
-    "seed": "node ./seeder/seed.js"
+    "seed": "node ./seeder/seed.js",
+    "lint": "eslint ./"
   },
   "keywords": [],
   "author": "",

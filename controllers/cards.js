@@ -9,8 +9,8 @@ const filterCards = async (req, res) => {
     });
     const visaCards = cards.filter(card => card.credit_card_type === 'visa');
     return res.status(200).json({visaCards});
-}
+};
 
 module.exports = {
     filterCards
-}
+};

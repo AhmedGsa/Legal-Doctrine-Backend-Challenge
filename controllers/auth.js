@@ -16,7 +16,7 @@ const login = async (req, res) => {
     }
     const token = user.createJWT(rememberMe);
     res.status(200).json({ success: true, token });
-}
+};
 
 const register = async (req, res) => {
     const { email, password, rememberMe } = req.body;
@@ -26,9 +26,9 @@ const register = async (req, res) => {
     const user = await User.create({ email, password });
     const token = user.createJWT(rememberMe);
     res.status(201).json({ success: true, token });
-}
+};
 
 module.exports = {
     login,
     register
-}
+};

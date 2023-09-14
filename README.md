@@ -14,7 +14,7 @@
 
 - Run `npm start` to start the server
 
-### Seed Data
+#### Seed Data
 
 - Run `npm run seed` to seed the database with some random data
 

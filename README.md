@@ -14,6 +14,10 @@
 
 - Run `npm start` to start the server
 
+### Seed Data
+
+- Run `npm run seed` to seed the database with some random data
+
 ### 2- Using Docker
 
 - Install Docker and Docker Compose Link [here](https://docs.docker.com/get-docker/)
@@ -21,10 +25,6 @@
 - Run `docker-compose build` to build the image
 
 - Run `docker-compose up` to start the server
-
-### Seed Data
-
-- Run `npm run seed` to seed the database with some random data
 
 ## API Documentation
 

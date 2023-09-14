@@ -9,7 +9,9 @@
     - JWT_SECRET (JWT secret key)   
     - JWT_EXPIRE_IN (JWT expiration time in seconds)
     - JWT_EXPIRE_SHORT (JWT expiration time in seconds for short lived tokens)
+
 - Run `npm install` to install all dependencies
+
 - Run `npm start` to start the server
 
 ### 2- Using Docker

@@ -15,6 +15,11 @@ services:
       - "3000:3000"
     networks:
       - node-app-network
+    environment:
+      - MONGO_URI=mongodb://mongo:27017/Legal-Doctrine-Backend-Challenge
+      - JWT_SECRET=secret
+      - JWT_EXPIRE=30d
+      - JWT_EXPIRE_SHORT=1d
     links:
       - mongo
     depends_on:
